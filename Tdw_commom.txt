@@ -1,0 +1,41 @@
+﻿*** Settings ***
+Library           OperatingSystem
+Library           SeleniumLibrary
+Library           DatabaseLibrary
+
+*** Variables ***
+${url}            https://www.tuandai.com/
+${username}       135000000
+${passwd}         @@@@@@@
+
+*** Keywords ***
+SetUp
+    Run    taskkill /f /im chromedriver.exe
+    Open Browser    ${url}    chrome
+    Maximize Browser Window
+    Comment    log    连接数据库
+    Comment    Connect To Database    pymysql    scott    tester    passwd    192.168.80.1
+    ...    3306    utf-8
+    Comment    log    清空数据库
+    Comment    Execute Sql String    DELETE FROM order_item
+
+TearDown
+    Close Browser
+
+Setup_Login
+    Run    taskkill /f /im chromedriver.exe
+    Open Browser    https://www.tuandai.com/    chrome
+    Maximize Browser Window
+    Comment    log    连接数据库
+    Comment    Connect To Database    pymysql    scott    tester    passwd    192.168.80.1
+    ...    3306    utf-8
+    Comment    log    清空数据库
+    Comment    Execute Sql String    DELETE FROM order_item
+    Click Link    立即登录
+    Wait Until Page Contains    马上注册
+    Input Text    css=input#username    ${username}
+    Input Text    css=input#password    ${passwd}
+    Click Element    xpath=//a[contains(.,'登录')]
+    Wait Until Page Contains    进入我的账户
+    ${x}    Get Text    css=dl.userinfo.tc
+    Page Should Contain    ${x}    ${username}

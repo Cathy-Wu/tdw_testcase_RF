@@ -1,0 +1,305 @@
+﻿*** Settings ***
+Resource          Tdw_commom.txt
+
+*** Test Cases ***
+Login
+    [Setup]    SetUp
+    Comment    Run    taskkill /f /im chromedriver.exe
+    Comment    Open Browser    https://www.tuandai.com/    chrome
+    Comment    Maximize Browser Window
+    Comment    log    连接数据库
+    Comment    Connect To Database    pymysql    scott    tester    passwd    192.168.80.1
+    ...    3306    utf-8
+    Comment    log    清空数据库
+    Comment    Execute Sql String    DELETE FROM order_item
+    Click Link    立即登录
+    Wait Until Page Contains    马上注册
+    Input Text    css=input#username    ${username}
+    Input Text    css=input#password    ${passwd}
+    Click Element    xpath=//a[contains(.,'登录')]
+    Wait Until Page Contains    进入我的账户
+    ${x}    Get Text    css=dl.userinfo.tc
+    Page Should Contain    ${x}    ${username}
+    Comment    Close Browser
+    [Teardown]    TearDown
+
+CaseLogin
+    [Setup]    SetUp
+    [Template]    Template_login
+    135000000    @@@@@@@@
+    [Teardown]    TearDown
+
+Newer
+    [Setup]    Setup_Login
+    [Timeout]
+    Click Element    css= div.tdw-pages.tdw-page1 div:nth-child(3) div.mt38.tdw-btn-lg > span
+    ${x}    List Windows
+    Select Window    ${x[-1]}
+    Wait Until Page Contains    服务介绍
+    Click Element    css=#btnSubscribe
+    Page Should Contain    购买失败：您注册团贷网已超过30天！
+    Sleep    5
+    Click Element    xpath=//div[@class='capital']/a[contains(.,'去充值')]
+    Wait Until Page Contains    网银支付
+    Click Element    css=ul[id=bankListDIV]>li:nth-child(12)
+    ${n}    Get Text    css=ul#bankListDIV
+    Should End With    ${n}    收起
+    ${m}    Get Element Count    css=ul#bankListDIV>li
+    Should Be True    ${m}==28
+    Click Element    css=ul[id=bankListDIV]>li:nth-last-child(3)
+    Comment    PAUSE
+    Input Text    css=input#t_money    500
+    Click Link    充值
+    ${y}    List Windows
+    Select Window    ${y[-1]}
+    Wait Until Page Contains    东莞团贷网互联网科技服务有限公司
+    [Teardown]    TearDown
+
+Recharge
+    [Setup]    Setup_Login
+    Click Element    css= div.tdw-pages.tdw-page1 div:nth-child(3) div.mt38.tdw-btn-lg > span
+    ${x}    List Windows
+    Select Window    ${x[-1]}
+    Wait Until Page Contains    服务介绍
+    Click Element    xpath=//div[@class='capital']/a[contains(.,'去充值')]
+    Wait Until Page Contains    网银支付
+    Click Element    css=ul[id=bankListDIV]>li:nth-child(12)
+    ${n}    Get Text    css=ul#bankListDIV
+    Should End With    ${n}    收起
+    ${m}    Get Element Count    css=ul#bankListDIV>li
+    Should Be True    ${m}==28
+    Click Element    css=ul[id=bankListDIV]>li:nth-last-child(3)
+    Click Element    xpath=//ul[@id='re-tabtit']/li[2]
+    Clear Element Text    css=input.text-input
+    Input Text    css=input#t_money    50000
+    Click Element    css=a#confirmRecharge
+    ${y}    List Windows
+    Select Window    ${y[-1]}
+    Page Should Contain    我知道了
+    Sleep    2
+    Click Element    css=a.submitBtn.submitBtn-2
+    Sleep    3
+    Page Should Contain    支付
+    Input Text    css=input#smsCode    123456
+    Input Text    css=input#password    654321
+    Click Button    css=input#isAgreeReg
+    Click Element    css=input#nextButton
+    Page Should Contain    密码不正确
+    Sleep    2
+    [Teardown]    TearDown
+
+Recharge_record
+    [Setup]    Setup_Login
+    Click Element    css= div.tdw-pages.tdw-page1 div:nth-child(3) div.mt38.tdw-btn-lg > span
+    ${x}    List Windows
+    Select Window    ${x[-1]}
+    Wait Until Page Contains    服务介绍
+    Wait Until Keyword Succeeds    30    2    Click Element    xpath=//div[@class='capital']/a[contains(.,'去充值')]
+    Wait Until Page Contains    充值中心
+    Click Link    充值记录
+    Comment    Wait Until Page Contains    查询记录
+    Wait Until Keyword Succeeds    30    2    Click Element    css=div.text-box i.arrow
+    Sleep    2
+    Click Element    css=#statusList > ul > li:nth-child(4)
+    Comment    Select From List By Label    xpath=//ul[@style="display: none;"]    审核成功    #ul[style='display: none;']>li:nth-child(3)
+    Click Element    css=input#txtBegin
+    Select Frame    css=body > div:nth-child(55) > iframe
+    Sleep    3
+    Click Element    css=div:nth-child(3) tr:nth-child(5) > td:nth-child(4)
+    Unselect Frame
+    Click Element    css=input#txtEnd
+    Select Frame    css=body > div:nth-child(55) > iframe
+    Sleep    3
+    Click Element    css=input#dpTodayInput
+    Unselect Frame
+    Comment    Comment    PAUSE
+    Comment    Click Element    css=input#txtBegin
+    Comment    Click Element    jquery=ul[style='display: none;']>li:nth-child(3)
+    Click Element    xpath=//input[@id="btnSearch"]
+    Sleep    3
+    ${k}    Get Text    css=div.no-mes-con
+    Should Be Equal    ${k}    您暂无充值记录
+    Comment    Should Be Equal As Strings    \    未付款
+    [Teardown]    TearDown
+
+Account_found
+    [Setup]    Setup_Login
+    Click Element    link=进入我的账户
+    Wait Until Page Contains    注册时间
+    ${m}    Get Text    css=div.font-16
+    Should Contain    ${m}    ${username}
+    Mouse Down On Link    css=a.my-account.db
+    Click Element    css=div#myAccount a:nth-child(3)
+    Wait Until Keyword Succeeds    30    2    Select Frame    css=div>iframe
+    Sleep    10
+    Comment    PAUSE
+    Click Element    css= div:nth-child(2) > div.chartbox > div:nth-child(2) > a.button.minus
+    Comment    PAUSE
+    Comment    Sleep    10
+    ${n}    Get Text    css=span#sYear
+    Should Be Equal    ${n}    2017
+    ${l}    Get Text    css= div:nth-child(2) \ div.chartbox \ li.selected
+    Unselect Frame
+    Comment    Comment    PAUSE
+    Click Element    link=我的团宝箱
+    Wait Until Page Contains    尚未使用
+    Click Element    css=a.tag-title.l.bdb0.g9
+    Wait Until Keyword Succeeds    30    2    Click Element    css=dt#redPacket
+    Click Element    css=dl.abs.show>dd:nth-child(4)
+    Click Element    css=input#txtDateMonth
+    Select Frame    css=div>iframe
+    Wait Until Keyword Succeeds    30    2    Click Element    css=input#dpClearInput
+    Unselect Frame
+    Click Element    css=a.search
+    ${a}    Get Element Count    css=li.gar
+    Should Be True    ${a}==2
+    Click Element    css=div.account-left>div>dl>dt
+    Click Element    css=a.reg-a
+    Wait Until Keyword Succeeds    30    2    Page Should Contain    登录
+    [Teardown]    TearDown
+
+withdraw_record
+    [Setup]    Setup_Login
+    Click Link    进入我的账户
+    Wait Until Keyword Succeeds    30    2    Click Element    css=#menu_withdraw > a
+    Sleep    10
+    ${q}    List Windows
+    Select Window    ${q[-1]}
+    Comment    Wait Until Page Contains    提现须知    10
+    Wait Until Keyword Succeeds    30    2    Click Element    css=tr:nth-child(2)>td.deposit_content>a
+    Wait Until Page Contains    安全中心
+    ${r}    Get Element Count    css=dd>i.starGreen
+    Should Be True    ${r}>1
+    ${t}    Get Text    css=div.items-type-1 li:nth-child(1)
+    Should Contain    ${t}    身份证不允许修改、更换或注销
+    ${p}    Get Text    css=div.items-type-1 li:nth-child(3)
+    Should Contain    ${p}    修改
+    Click Element    css=div.items-type-1 li:nth-child(3)>span.item-4
+    Wait Until Page Contains    通过原手机短信修改
+    Click Element    css=div#diveditphone1
+    Click Element    xpath=//a[@id='btn_send_sms1']
+    ${x}    Get Text    xpath=//a[@id='btn_send_tips1']
+    Should Contain    ${x}    正在发送
+    Comment    Wait Until Keyword Succeeds    60    10    Should Contain    ${x}    操作成功
+    Input Text    id=txtCode    123456
+    Click Element    xpath=//div[@id='divPhone']/div[3]/span[2]/a[contains(.,'确定')]
+    ${y}    Get Text    css=span#errormsg_origtelno
+    Should Be Equal    ${y}    验证码不正确，请重新输入！
+    [Teardown]    TearDown
+
+withdraw_changeNumber
+    [Setup]    Setup_Login
+    Click Link    进入我的账户
+    Wait Until Keyword Succeeds    30    2    Click Element    css=#menu_withdraw > a
+    Sleep    10
+    ${q}    List Windows
+    Select Window    ${q[-1]}
+    Comment    Wait Until Page Contains    提现须知    10
+    Wait Until Keyword Succeeds    30    2    Click Element    css=tr:nth-child(2)>td.deposit_content>a
+    Wait Until Page Contains    安全中心
+    ${r}    Get Element Count    css=dd>i.starGreen
+    Should Be True    ${r}>1
+    ${t}    Get Text    css=div.items-type-1 li:nth-child(1)
+    Should Contain    ${t}    身份证不允许修改、更换或注销
+    ${p}    Get Text    css=div.items-type-1 li:nth-child(3)
+    Should Contain    ${p}    修改
+    Click Element    css=div.items-type-1 li:nth-child(3)>span.item-4
+    Wait Until Page Contains    请先设置安全问题
+    Click Element    css=div.edit-phone.margin-right-0
+    Wait Until Keyword Succeeds    30    2    Select From List By Index    id=selQuestion1    3
+    Input Text    id=txSafeQuestion_Step0_Answer1    19570317
+    Select From List By Label    id=selQuestion2    您母亲的生日是？
+    Input Text    id=txSafeQuestion_Step0_Answer2    19600319
+    Click Element    css=a#safequestion_step0_submit
+    [Teardown]    TearDown
+
+withdrawVerifyEmail
+    [Setup]    Setup_Login
+    Click Link    进入我的账户
+    Wait Until Keyword Succeeds    30    2    Click Element    css=#menu_withdraw > a
+    Sleep    10
+    ${q}    List Windows
+    Select Window    ${q[-1]}
+    Comment    Wait Until Page Contains    提现须知    10
+    Wait Until Keyword Succeeds    30    2    Click Element    css=tr:nth-child(2)>td.deposit_content>a
+    Wait Until Page Contains    安全中心
+    ${r}    Get Element Count    css=dd>i.starGreen
+    Should Be True    ${r}>1
+    ${t}    Get Text    css=div.items-type-1 li:nth-child(1)
+    Should Contain    ${t}    身份证不允许修改、更换或注销
+    ${p}    Get Text    css=li#s_email>span:nth-child(2)
+    Should Be Equal    ${p}    未认证
+    Click Element    css=a.button-yellow-3.email-verification-btn
+    Wait Until Keyword Succeeds    30    2    Input Text    id=txtUserEmailNew    1787293548@qq.com
+    Click Element    id=lnkBindNewEmail
+    Wait Until Keyword Succeeds    30    2    Input Text    id=txtNewBindEmailCode    123456
+    Click Element    id=lnkNewBindEmailSubmit
+    ${k}    Get Text    id=spnNewBindEmailError
+    Should Contain    ${k}    验证码错误
+    [Teardown]    TearDown
+
+withdrawChangePasswd
+    [Setup]    Setup_Login
+    Click Link    进入我的账户
+    Wait Until Keyword Succeeds    30    2    Click Element    css=#menu_withdraw > a
+    Sleep    10
+    ${q}    List Windows
+    Select Window    ${q[-1]}
+    Comment    Wait Until Page Contains    提现须知    10
+    Wait Until Keyword Succeeds    30    2    Click Element    css=tr:nth-child(2)>td.deposit_content>a
+    Wait Until Page Contains    安全中心
+    ${r}    Get Element Count    css=dd>i.starGreen
+    Should Be True    ${r}>1
+    ${t}    Get Text    css=ul > li:nth-child(9) > span.item-1
+    Should Contain    ${t}    登录密码
+    Click Element    css=ul > li:nth-child(9) > span.item-4
+    Wait Until Keyword Succeeds    30    2    Input Text    id=oldpassword    ${passwd}
+    Input Text    id=txtNewPassword    @@@@@
+    Input Text    id=txtNewPassword1    @@@@@
+    Click Link    id=lnkSubmit
+    Sleep    3
+    ${v}    Get Text    id=UpdatePwdError
+    Should Be Equal    ${v}    新密码不能跟旧密码一样！
+    [Teardown]    TearDown
+
+withdrawDissConnect
+    [Setup]    Setup_Login
+    Click Link    进入我的账户
+    Wait Until Keyword Succeeds    30    2    Click Element    css=#menu_withdraw > a
+    Sleep    10
+    ${q}    List Windows
+    Select Window    ${q[-1]}
+    Comment    Wait Until Page Contains    提现须知    10
+    Wait Until Keyword Succeeds    30    2    Click Element    css=tr:nth-child(2)>td.deposit_content>a
+    Wait Until Page Contains    安全中心
+    ${r}    Get Element Count    css=dd>i.starGreen
+    Should Be True    ${r}>1
+    Wait Until Keyword Succeeds    30    2    Click Element    css=a.button-yellow-4.pr15
+    Wait Until Keyword Succeeds    30    2    Page Should Contain    温馨提示
+    Click Element    css=div.modify_code
+    ${t}    Get Element Attribute    css=div.codeda    style
+    Should Contain    ${t}    display: block;
+    Comment    PAUSE
+    Click Element    css=i.close-pop
+    [Teardown]    TearDown
+
+*** Keywords ***
+Template_login
+    [Arguments]    ${username}    ${password}
+    Comment    Run    taskkill /f /im chromedriver.exe
+    Comment    Open Browser    https://www.tuandai.com/    chrome
+    Comment    Maximize Browser Window
+    Comment    log    连接数据库
+    Comment    Connect To Database    pymysql    scott    tester    passwd    192.168.80.1
+    ...    3306    utf-8
+    Comment    log    清空数据库
+    Comment    Execute Sql String    DELETE FROM order_item
+    Click Link    立即登录
+    Wait Until Page Contains    马上注册
+    Input Text    css=input#username    ${username}
+    Input Text    css=input#password    ${password}
+    Click Element    xpath=//a[contains(.,'登录')]
+    Wait Until Page Contains    进入我的账户
+    ${x}    Get Text    css=dl.userinfo.tc
+    Page Should Contain    ${x}    ${username}
+    Comment    Close Browser

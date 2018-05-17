@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20180424 15:15:35.548" generator="Robot 3.0.2 (Python 2.7.14 on win32)">
+<suite source="F:\video_study\mendao\RF\Practise\Tdw\Home_page.txt" id="s1" name="Home page">
+<test id="s1-t1" name="Login">
+<kw type="setup" name="SetUp" library="Tdw_commom">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>taskkill /f /im chromedriver.exe</arg>
+</arguments>
+<msg timestamp="20180424 15:15:35.719" level="INFO">Running command 'taskkill /f /im chromedriver.exe 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20180424 15:15:35.741" starttime="20180424 15:15:35.717"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>${url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20180424 15:15:35.741" level="INFO">Opening browser 'chrome' to base url 'https://www.tuandai.com/'.</msg>
+<status status="PASS" endtime="20180424 15:15:43.135" starttime="20180424 15:15:35.741"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20180424 15:15:44.272" starttime="20180424 15:15:43.135"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>连接数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.273" starttime="20180424 15:15:44.272"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Connect To Database</arg>
+<arg>pymysql</arg>
+<arg>scott</arg>
+<arg>tester</arg>
+<arg>passwd</arg>
+<arg>192.168.80.1</arg>
+<arg>3306</arg>
+<arg>utf-8</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.273" starttime="20180424 15:15:44.273"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>清空数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.273" starttime="20180424 15:15:44.273"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Execute Sql String</arg>
+<arg>DELETE FROM order_item</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.273" starttime="20180424 15:15:44.273"></status>
+</kw>
+<status status="PASS" endtime="20180424 15:15:44.274" starttime="20180424 15:15:35.717"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Run</arg>
+<arg>taskkill /f /im chromedriver.exe</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.274" starttime="20180424 15:15:44.274"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Open Browser</arg>
+<arg>https://www.tuandai.com/</arg>
+<arg>chrome</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.275" starttime="20180424 15:15:44.274"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Maximize Browser Window</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.275" starttime="20180424 15:15:44.275"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>连接数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.276" starttime="20180424 15:15:44.275"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Connect To Database</arg>
+<arg>pymysql</arg>
+<arg>scott</arg>
+<arg>tester</arg>
+<arg>passwd</arg>
+<arg>192.168.80.1</arg>
+<arg>3306</arg>
+<arg>utf-8</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.276" starttime="20180424 15:15:44.276"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>清空数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.276" starttime="20180424 15:15:44.276"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Execute Sql String</arg>
+<arg>DELETE FROM order_item</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.277" starttime="20180424 15:15:44.277"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>立即登录</arg>
+</arguments>
+<msg timestamp="20180424 15:15:44.277" level="INFO">Clicking link '立即登录'.</msg>
+<status status="PASS" endtime="20180424 15:15:44.859" starttime="20180424 15:15:44.277"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<doc>Waits until ``text`` appears on current page.</doc>
+<arguments>
+<arg>马上注册</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:44.873" starttime="20180424 15:15:44.860"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>css=input#username</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20180424 15:15:44.874" level="FAIL">Variable '${username}' not found.</msg>
+<status status="FAIL" endtime="20180424 15:15:44.874" starttime="20180424 15:15:44.874"></status>
+</kw>
+<kw type="teardown" name="TearDown" library="Tdw_commom">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20180424 15:15:47.893" starttime="20180424 15:15:44.875"></status>
+</kw>
+<status status="PASS" endtime="20180424 15:15:47.894" starttime="20180424 15:15:44.875"></status>
+</kw>
+<status status="FAIL" endtime="20180424 15:15:47.895" critical="yes" starttime="20180424 15:15:35.717">Variable '${username}' not found.</status>
+</test>
+<test id="s1-t2" name="CaseLogin">
+<kw type="setup" name="SetUp" library="Tdw_commom">
+<kw name="Run" library="OperatingSystem">
+<doc>Runs the given command in the system and returns the output.</doc>
+<arguments>
+<arg>taskkill /f /im chromedriver.exe</arg>
+</arguments>
+<msg timestamp="20180424 15:15:47.908" level="INFO">Running command 'taskkill /f /im chromedriver.exe 2&gt;&amp;1'.</msg>
+<status status="PASS" endtime="20180424 15:15:48.006" starttime="20180424 15:15:47.903"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>${url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20180424 15:15:48.007" level="INFO">Opening browser 'chrome' to base url 'https://www.tuandai.com/'.</msg>
+<status status="PASS" endtime="20180424 15:15:55.391" starttime="20180424 15:15:48.006"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20180424 15:15:56.528" starttime="20180424 15:15:55.391"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>连接数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.528" starttime="20180424 15:15:56.528"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Connect To Database</arg>
+<arg>pymysql</arg>
+<arg>scott</arg>
+<arg>tester</arg>
+<arg>passwd</arg>
+<arg>192.168.80.1</arg>
+<arg>3306</arg>
+<arg>utf-8</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.529" starttime="20180424 15:15:56.528"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>清空数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.529" starttime="20180424 15:15:56.529"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Execute Sql String</arg>
+<arg>DELETE FROM order_item</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.529" starttime="20180424 15:15:56.529"></status>
+</kw>
+<status status="PASS" endtime="20180424 15:15:56.529" starttime="20180424 15:15:47.902"></status>
+</kw>
+<kw name="Template_login">
+<arguments>
+<arg>13538264253</arg>
+<arg>cathy930204</arg>
+</arguments>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Run</arg>
+<arg>taskkill /f /im chromedriver.exe</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.530" starttime="20180424 15:15:56.530"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Open Browser</arg>
+<arg>https://www.tuandai.com/</arg>
+<arg>chrome</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.530" starttime="20180424 15:15:56.530"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Maximize Browser Window</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.531" starttime="20180424 15:15:56.530"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>连接数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.531" starttime="20180424 15:15:56.531"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Connect To Database</arg>
+<arg>pymysql</arg>
+<arg>scott</arg>
+<arg>tester</arg>
+<arg>passwd</arg>
+<arg>192.168.80.1</arg>
+<arg>3306</arg>
+<arg>utf-8</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.531" starttime="20180424 15:15:56.531"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>log</arg>
+<arg>清空数据库</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.531" starttime="20180424 15:15:56.531"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Execute Sql String</arg>
+<arg>DELETE FROM order_item</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:56.532" starttime="20180424 15:15:56.531"></status>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<doc>Clicks a link identified by ``locator``.</doc>
+<arguments>
+<arg>立即登录</arg>
+</arguments>
+<msg timestamp="20180424 15:15:56.532" level="INFO">Clicking link '立即登录'.</msg>
+<status status="PASS" endtime="20180424 15:15:57.263" starttime="20180424 15:15:56.532"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<doc>Waits until ``text`` appears on current page.</doc>
+<arguments>
+<arg>马上注册</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:15:57.298" starttime="20180424 15:15:57.264"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>css=input#username</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20180424 15:15:57.299" level="INFO">Typing text '13538264253' into text field 'css=input#username'.</msg>
+<status status="PASS" endtime="20180424 15:15:57.366" starttime="20180424 15:15:57.298"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>css=input#password</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20180424 15:15:57.366" level="INFO">Typing text 'cathy930204' into text field 'css=input#password'.</msg>
+<status status="PASS" endtime="20180424 15:15:57.425" starttime="20180424 15:15:57.366"></status>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//a[contains(.,'登录')]</arg>
+</arguments>
+<msg timestamp="20180424 15:15:57.426" level="INFO">Clicking element 'xpath=//a[contains(.,'登录')]'.</msg>
+<status status="PASS" endtime="20180424 15:15:58.354" starttime="20180424 15:15:57.426"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<doc>Waits until ``text`` appears on current page.</doc>
+<arguments>
+<arg>进入我的账户</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:16:00.132" starttime="20180424 15:15:58.354"></status>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<doc>Returns the text value of element identified by ``locator``.</doc>
+<arguments>
+<arg>css=dl.userinfo.tc</arg>
+</arguments>
+<assign>
+<var>${x}</var>
+</assign>
+<msg timestamp="20180424 15:16:00.163" level="INFO">${x} = 13538264253pc170204</msg>
+<status status="PASS" endtime="20180424 15:16:00.163" starttime="20180424 15:16:00.132"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>${x}</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20180424 15:16:00.179" level="INFO">Current page contains text '13538264253pc170204'.</msg>
+<status status="PASS" endtime="20180424 15:16:00.179" starttime="20180424 15:16:00.163"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>PAUSE</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:16:00.179" starttime="20180424 15:16:00.179"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>Close Browser</arg>
+</arguments>
+<status status="PASS" endtime="20180424 15:16:00.180" starttime="20180424 15:16:00.180"></status>
+</kw>
+<status status="PASS" endtime="20180424 15:16:00.180" starttime="20180424 15:15:56.530"></status>
+</kw>
+<kw type="teardown" name="TearDown" library="Tdw_commom">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20180424 15:16:03.224" starttime="20180424 15:16:00.180"></status>
+</kw>
+<status status="PASS" endtime="20180424 15:16:03.225" starttime="20180424 15:16:00.180"></status>
+</kw>
+<status status="PASS" endtime="20180424 15:16:03.226" critical="yes" starttime="20180424 15:15:47.900"></status>
+</test>
+<status status="FAIL" endtime="20180424 15:16:03.233" starttime="20180424 15:15:35.549"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="1">Critical Tests</stat>
+<stat fail="1" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="1" id="s1" name="Home page" pass="1">Home page</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
